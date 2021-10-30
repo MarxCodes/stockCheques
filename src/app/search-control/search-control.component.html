@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="bg"></div>
+  <div class="content-small content">
+    <div class="option-select">
+      <!-- <ul>
+        <li>
+          <input #myRef type="radio" id="a-option" name="selector" />
+          <label for="a-option">A</label>
+          <div class="check"></div>
+        </li>
+
+        <li>
+          <input type="radio" id="b-option" name="selector" />
+          <label for="b-option">B</label>
+
+          <div class="check"></div>
+        </li>
+      </ul> -->
+
+      <!-- <div class="input-container">
+        <label for="c-option">
+          BIT
+          <input type="radio" id="c-option" name="selector" />
+        </label>
+        <div class="check"></div>
+      </div> -->
+
+      <form [formGroup]="form">
+        <!-- <label for=""></label> -->
+        <label for="detailed"
+          >detailed
+          <input
+            (change)="onItemChange($event.target.value)"
+            id="detailed"
+            type="radio"
+            formControlName="food"
+            value="detailed"
+          />
+          <div class="check"></div>
+        </label>
+
+        <label for="comparison"
+          >comparison
+          <input
+            id="comparison"
+            type="radio"
+            formControlName="food"
+            value="comparison"
+            (change)="onItemChange($event.target.value)"
+          />
+          <div class="check"></div>
+        </label>
+
+        <!-- <input type="radio" formControlName="food" value="fish" /> Fish -->
+      </form>
+      <!-- <p>Form value: {{ form.value | json }}</p> -->
+    </div>
+
+    <div #searchGrid class="search-section" [attr.data-view]="detailed">
+      <input
+        #myInput
+        type="search"
+        class="input is-medium"
+        [formControl]="control"
+        [appAutocomplete]="autocomplete"
+      />
+      <!-- <div class="input-wrapper">
+        <button class="delete-text" (click)="deleteText()">x</button>
+      </div> -->
+      <button
+        *ngIf="condition"
+        class="add"
+        (click)="checkIt(enlargeAnimation)"
+        (click)="addItem()"
+      >
+        +
+      </button>
+      <button class="search" (click)="findSearchInputVal()">Search</button>
+      <app-autocomplete #autocomplete="appAutocomplete">
+        <ng-template appAutocompleteContent>
+          <ng-container *ngIf="products | filter: control.value as result">
+            <app-option
+              (passData)="passMyData($event, option)"
+              *ngFor="let option of result.slice(0, 10)"
+              [value]="option.Name"
+            >
+              <h1 class="autocomplete-complete-option_symbol">
+                {{ option.Symbol }}
+              </h1>
+              <br />
+              <h2 class="autocomplete-complete-option_name">
+                {{ option.Name }}
+              </h2>
+            </app-option>
+            <app-option class="no-result" *ngIf="!result.length"
+              >No result...</app-option
+            >
+          </ng-container>
+        </ng-template>
+      </app-autocomplete>
+    </div>
+  </div>
+
+  <div class="content-big content">
+    <div class="options-section">
+      <app-select
+        *ngFor="let bald of clickedEls; index as i"
+        (delete)="deleteItem($event, i)"
+      >
+        <p style="color: black; font-size: 18px; margin-bottom: 10px">
+          {{ bald.Symbol }}
+        </p>
+      </app-select>
+    </div>
+  </div>
+</div>

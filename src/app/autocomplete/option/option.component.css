@@ -1,0 +1,13 @@
+.option{
+  background-color: #dcdde1;
+  padding: .4rem .5rem;
+  border-bottom: 1px solid #718093;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.option > * {
+  margin-left: 20px;
+}
+

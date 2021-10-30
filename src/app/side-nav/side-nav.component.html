@@ -1,0 +1,50 @@
+<!-- <div class="container">
+  <h2>side navigation</h2>
+  <ul *ngFor="let item of sideNavOptions">
+    <li>{{item}}</li>
+  </ul>
+</div> -->
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+
+    <div class="control">
+      <input
+        class="input is-medium"
+        placeholder="Search..."
+        [formControl]="control"
+        [appAutocomplete]="autocomplete"
+      />
+    </div>
+    <app-autocomplete #autocomplete="appAutocomplete">
+      <ng-template appAutocompleteContent>
+        <ng-container *ngIf="options | filter: control.value as result">
+          <app-option
+            (passData)="passMyData($event, option)"
+            *ngFor="let option of result"
+            [value]="option.label"
+          >
+            {{ option.label }}
+          </app-option>
+          <app-option class="no-result" *ngIf="!result.length"
+            >No result...</app-option
+          >
+        </ng-container>
+      </ng-template>
+      <!--
+      <ng-template appSelctContent>
+        <ng-container *ngIf="(clickedEls) as res">
+      </ng-container>
+    </ng-template> -->
+    </app-autocomplete>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" (click)="drawer.toggle()">Toggle sidenav</button>
+  </div>
+</mat-drawer-container>

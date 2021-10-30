@@ -1,0 +1,186 @@
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+// :root{
+
+//   --duration: .6s;
+//   --easing: cubic-bezier(0.6, 0, 0.4, 1);
+//   --delay: 0s;
+//   --radius: 1em;
+//   --bg: #eec0ab;
+// }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  position: relative;
+}
+
+.selectedItem {
+
+}
+
+.container {
+  width: 20em;
+  margin: auto;
+  // height: 10rem;
+  --radius: 1em;
+  --bg: #eec0ab;
+  // background-color: aquamarine;
+  // padding: 0 10%;
+  transform-origin: top left;
+  transition-property: transform;
+  transition-duration: 0.5s;
+  transition-delay: 0.5s;
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  // * {
+  //   transition-duration: var(--duration);
+  //   transition-delay: var(--delay);
+  //   transition-timing-function: var(--easing);
+  // }
+
+  &[data-enlarging] {
+    transition: none;
+    transform: translateY(calc(-1px * var(--by)));
+  }
+}
+.content {
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  // width: 100%;
+
+}
+
+.content-big {
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+}
+
+.container[data-state='shrink'] .content-big {
+  opacity: 0;
+  transition-delay: 1s;
+}
+
+.container[data-state="enlarge"] .content-big {
+  opacity: 1;
+  transition-delay: 1s;
+
+}
+
+// .container[data-state="enlarge"] .content-big,
+// .container[data-state="shrink"] .content-small{
+//   position: relative;
+//   transition-delay: 1s;
+//   opacity: 1;
+// }
+
+.bg {
+  transform-origin: top left;
+  transition: inherit;
+  transition-property: transform, border-radius;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  border-radius: var(--radius);
+  pointer-events: none;
+
+  [data-enlarging] > & {
+    transform: scaleY(calc(1 / var(--bh)));
+    border-radius: calc((var(--bw)) * var(--radius)) /
+      calc((var(--bh)) * var(--radius));
+  }
+}
+
+.btn-section {
+  display: grid;
+  grid-gap: 1em;
+  padding: 0 10%;
+  position: relative;
+  & > * {
+    transition: transform .3s;
+    transition-property: transform, opacity, visibility;
+  }
+
+  .add {
+    // outline: 1px solid red;
+
+    &::before {
+      content: '';
+      outline: 2px dashed yellow;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+    }
+  }
+
+  .search-btn {
+    transform-origin: left;
+  }
+}
+
+.btn-section[data-view='comparison'] {
+  grid-template-columns: minmax(min-content, 70%) 1fr 1fr;
+  .add{
+    display: inline-block;
+  }
+
+  .search-btn {
+    // grid-column: span 1;
+
+  }
+}
+.btn-section[data-view='detailed'] {
+  grid-template-columns: minmax(min-content, 70%) 1fr 1fr;
+
+  .search-btn {
+    // grid-column: span 2;
+  }
+  .add{
+    display: none;
+    // visibility: hidden;
+    // position: absolute;
+    // top: 20%;
+    // left: 50%;
+  }
+}
+[data-flip] {
+  transition-property: transform visibiility;
+
+  &[data-flipping] {
+    transition: none;
+    transform: translate(calc(-1px * var(--dx)), calc(-1px * var(--dy)));
+  }
+  &[data-clip] {
+    // transition-property: visibiility;
+    transition: none;
+    visibility: block;
+  }
+}
+
+
+@media (min-width: 20em) {
+  .container {
+    width: 100%;
+}
+}
+
+
+.options-section {
+  display: flex;
+  flex-direction: row;
+
+  .selectedItem {
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
