@@ -7,6 +7,7 @@ import {
   ViewChild,
   ViewChildren,
   AfterViewInit,
+  Output,
 } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { tap } from 'rxjs/operators';
@@ -36,20 +37,24 @@ export class PracticeControlComponent  {
   comparison = 'comparison';
   btnView = 'detailed';
   tempArr = [];
-  selectedArr = [];
+  @Output() selectedArr = [];
   condition = false;
   bondi : boolean = false;
   @ViewChild('enlargeAnimation', { static: true}) enlargeAnimation : ElementRef;
   enlarge = 'enlarge';
   shrink = 'shrink';
   containerView = 'shrink';
+
+  @Output() showCharts = false;
   constructor() {}
 
 
 
   fn() {}
 
-  search() {}
+  search() {
+    this.showCharts = !this.showCharts;
+  }
 
   toggleView() {
     // this.selectedArr = [];
@@ -217,11 +222,11 @@ export class PracticeControlComponent  {
       // alert(`event ${e},${u}`);
     }
 
-    sendDataToArray(option) {
-      this.selectedArr.push(option);
-      console.log('from senddata2arr func:', option.Symbol);
-      this.selectedArr
-    }
+    // sendDataToArray(option) {
+    //   this.selectedArr.push(option);
+    //   console.log('from senddata2arr func:', option.Symbol);
+    //   this.selectedArr
+    // }
   }
 //     inputVal(e){
 //       if(this.btnView === 'comparison') {

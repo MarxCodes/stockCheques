@@ -1,0 +1,78 @@
+.container {
+
+
+  .heading {
+    h1 {
+      font-size: 3em;
+      color: black;
+      font-family: var(--figure-font);
+      font-weight: bold;
+      margin: 0.5em 0;
+
+    }
+
+    hr {
+      max-width: 600px;
+      color: #FDCB6E;
+      border: none;
+      height: 1.5em;
+      /* Set the hr color */
+      background-color: #FDCB6E; /* Modern Browsers */
+
+    }
+  }
+
+
+
+  .movers-container, .article-container {
+    width: 20em;
+    float: left;
+    clear: left;
+  }
+
+  .article-container article {
+    font-family: var(--figure-font);
+    font-size: 1em;
+    margin: 0;
+
+  }
+  .article-container article time {
+    font-weight: 100;
+    color: #636E72;
+  }
+  .article-container article .story-headline a {
+    color: #2D3436;
+    font-weight: 900;
+
+  }
+
+
+  @media screen and (min-width: 80em) and (max-width: 9999em) {
+    .heading {
+      width: 20em;
+
+    }
+
+    main {
+      width: 50rem;
+    }
+    .article-container {
+      width: 20em;
+      float: left;
+    }
+  }
+
+  @media screen and (min-width: 47.5em) {
+    .heading {
+      float: left;
+      clear: left;
+    }
+
+
+    main {
+      float: right;
+    }
+
+  }
+
+}

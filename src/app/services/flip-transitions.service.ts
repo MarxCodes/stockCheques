@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import { SearchControllerService } from './search-controller.service';
+// import { SearchControllerService } from './search-controller.service';
 @Injectable({
   providedIn: 'root'
 })
 export class FlipTransitionsService {
 
-  constructor(private controllerService: SearchControllerService) { }
+  constructor() { }
 
-  Dasflip(toggleState, firstEl, getLastEl = () => firstEl, attribute) {
+  Dasflip(fn, firstEl, attribute, getLastEl = () => firstEl) {
+    console.log('are we getting this far?')
     const firstRect = this.getRect(firstEl);
+
     // console.log('is there a first rectangle?', firstRect);
     requestAnimationFrame(() => {
-      this.toggleView();
+      fn();
 
       let lastEl = getLastEl();
       const lastRect = this.getRect(lastEl);
@@ -45,9 +47,11 @@ export class FlipTransitionsService {
     });
   }
 
-  toggleView(){
-    this.controllerService.toggleView();
-  }
+  // toggleView(){
+  //   this.controllerService.toggleView();
+  // }
+
+
   getRect(el) {
     return el.getBoundingClientRect();
   }

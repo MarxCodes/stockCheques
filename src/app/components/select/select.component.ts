@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
-  styleUrls: ['./select.component.css']
+  styleUrls: ['./select.component.scss']
 })
 export class SelectComponent implements OnInit {
   @Input() selected;
@@ -14,7 +14,7 @@ export class SelectComponent implements OnInit {
   }
 
   deleteItem(){
-    this.delete.emit()
+    this.delete.emit();
   }
 
 }

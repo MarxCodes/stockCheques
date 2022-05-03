@@ -1,0 +1,9 @@
+<h1>reporting</h1>
+<div class="container">
+  <div class="line-chart">
+    <app-line-charty></app-line-charty>
+  </div>
+  <div class="detail-cards">
+    <app-stock-tab *ngFor="let item of barr" [item]="item"> </app-stock-tab>
+  </div>
+</div>

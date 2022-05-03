@@ -1,0 +1,65 @@
+table {
+  width: 50em;
+  max-width: 100%;
+  border-collapse: collapse;
+  box-shadow: var(--box-shadow);
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-family: var(--figure-font);
+    border: none;
+  }
+
+  th {
+    font-size: 2em;
+    color: white;
+  }
+
+  td {
+    font-size: 1.3em;
+    color: #2D3436;
+    font-family: var(--number-font);
+    span {
+      padding: .3em;
+    }
+  }
+
+  tr {
+    border-bottom: dashed 2px black;
+  }
+
+  tr:nth-child(1) {
+
+    background-color: #2D3436;
+    color: white;
+  }
+  tr:nth-child(odd) {
+    // background-color: #fff;
+  }
+}
+
+
+.even {
+  // color: green;
+  background-color: #55EFC4;
+}
+
+.odd {
+  background-color: #FAB1A0;
+}
+
+h1 {
+  font-family: var(--figure-font);
+  font-size: 1em;
+  margin: 0;
+
+}
+
+.stock_symbol{
+  color: #636E72;
+}
+
+.stock_name {
+  color: #2D3436;
+}

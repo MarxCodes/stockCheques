@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="heading">
+    <hr />
+    <h1>{{ stockTitle }}</h1>
+    <h2>{{ stockTicker }}</h2>
+  </div>
+  <main>
+    <!--
+      SELECT HTML
+    <div class="select-container">
+    <select (change)="selectChange($event)" name="moneys" id="" #child>
+      <option value="selected">please choose</option>
+      <option *ngFor="let item of cult" [value]="item">
+        {{ item | seperate }}
+      </option>
+    </select>
+  </div> -->
+
+    <mat-tab-group preserveContent>
+      <mat-tab label="Month">
+        <app-single-price-chart [months]="6"></app-single-price-chart>
+      </mat-tab>
+      <mat-tab label="6 Months">
+        <!-- <app-single-price-chart
+        [months]="12"
+        [inputData]="alphaMonthData"
+      ></app-single-price-chart> -->
+      </mat-tab>
+      <mat-tab label="12 Months">
+        <!-- <app-single-price-chart
+        [months]="24"
+        [inputData]="alphaMonthData"
+      ></app-single-price-chart> -->
+      </mat-tab>
+      <mat-tab label="2 Years">
+        <app-single-price-chart></app-single-price-chart>
+      </mat-tab>
+    </mat-tab-group>
+  </main>
+  <div class="table-container" *ngIf="tableData | async as tables">
+    <table *ngFor="let item of tables">
+      <tr>
+        <th>Name</th>
+        <th>Value</th>
+      </tr>
+
+      <tr>
+        <td>Revenues</td>
+        <td>{{ item.Revenues }}</td>
+      </tr>
+      <tr>
+        <td>Earnings Per Share</td>
+        <td>{{ item.EarningsPerShareBasic }}</td>
+      </tr>
+      <tr>
+        <td>Stockholders Equity</td>
+        <td>{{ item.StockholdersEquity }}</td>
+      </tr>
+
+      <tr>
+        <td>Profit/Loss</td>
+        <td>{{ item.ProfitLoss }}</td>
+      </tr>
+      <tr>
+        <td>NetIncomeLoss</td>
+        <td>{{ item.NetIncomeLoss }}</td>
+      </tr>
+      <tr>
+        <td>Accounts Payable Current</td>
+        <td>{{ item.AccountsPayableCurrent }}</td>
+      </tr>
+      <tr>
+        <td>Debt</td>
+        <td>{{ item.DebtCurrent }}</td>
+      </tr>
+      <tr>
+        <td>Liabilities</td>
+        <td>{{ item.Liabilities }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

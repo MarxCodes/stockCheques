@@ -1,4 +1,7 @@
+<h1 *ngIf="!hideMap">No options selected!</h1>
+
 <ngx-charts-line-chart
+  *ngIf="forked | async as meData"
   [view]="view"
   [scheme]="colorScheme"
   [legend]="legend"
@@ -9,9 +12,10 @@
   [xAxisLabel]="xAxisLabel"
   [yAxisLabel]="yAxisLabel"
   [timeline]="timeline"
-  [results]="multi"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)"
+  [results]="meData"
 >
 </ngx-charts-line-chart>
+
+<!-- <ul *ngFor="let item of barr; let last = last">
+  <li>{{ item.nameTing }}</li>
+</ul> -->

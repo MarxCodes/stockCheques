@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, ElementRef, OnChanges, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { AfterContentChecked, Component, ElementRef, OnChanges, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataService } from '../data.service';
 import * as data from '../arrayFun.json';
@@ -14,8 +14,6 @@ export class SearchControlComponent implements OnInit, OnChanges   {
   form = new FormGroup({
     food: new FormControl('detailed')
   });
-
-  // control = new FormControl();
   @ViewChild('myRef', { static: true}) myRef : ElementRef;
   @ViewChild('myInput', { static: true}) myInput : ElementRef;
   // @ViewChild('deleteTextBtn', { static: true}) deleteTextBtn: ElementRef;
@@ -39,6 +37,10 @@ export class SearchControlComponent implements OnInit, OnChanges   {
   searchInputFull = false;
 
   constructor(private ds: DataService) { }
+
+  hidePanel() {
+    this.ds.toggle.emit(false);
+  }
 
   addItem() {
     // this.myInput.nativeElement.value = ' ';

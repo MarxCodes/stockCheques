@@ -1,0 +1,36 @@
+<!-- <table *ngIf="savedJobs | async as data"> -->
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+    <th>Month change %</th>
+    <th>Annual Change %</th>
+    <th>Volume</th>
+  </tr>
+  <!-- <tr
+    *ngFor="let item of data"
+    [routerLink]="['/user/saved', item._id, 'detail']"
+  > -->
+  <tr
+    *ngFor="let item of finishedArr"
+    [routerLink]="['/detail', item.symbol, item.name]"
+  >
+    <td>
+      <h1 class="stock_symbol">{{ item.symbol }}</h1>
+      <h1 class="stock_name">{{ item.name }}</h1>
+    </td>
+    <td>${{ item.close | number: "1.0-2" }}</td>
+    <td>
+      <span [ngClass]="{ odd: item.monthChange > 0 ? 'even' : 'odd' }">
+        {{ item.monthChange | number: "1.0-2" }}
+      </span>
+    </td>
+    <td>
+      <span>
+        {{ item.annualChange | number: "1.0-2" }}
+      </span>
+    </td>
+    <td>{{ item.volume }}</td>
+  </tr>
+</table>

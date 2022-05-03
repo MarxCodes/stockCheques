@@ -1,5 +1,5 @@
 // export var multi = [{"name":"4027949","series":[{"value":94,"name":"1"},{"value":178,"name":"2"},{"value":216,"name":"3"},{"value":301,"name":"4"},{"value":364,"name":"5"},{"value":406,"name":"6"},{"value":473,"name":"7"},{"value":536,"name":"8"},{"value":617,"name":"9"},{"value":670,"name":"10"}]}];
-export var multi = [
+export var culty = [
   {
     "name": "Germany",
     "series": [

@@ -1,0 +1,41 @@
+<!-- <app-stock-tab></app-stock-tab> -->
+<div class="container">
+  <!-- <aside> -->
+  <div class="heading">
+    <hr />
+    <h1>Stocks</h1>
+  </div>
+  <main>
+    <app-tab-container></app-tab-container>
+  </main>
+  <div class="movers-container">
+    <div class="gainers-container">
+      <h1>Gainers</h1>
+      <div class="card-container">
+        <app-stock-tab *ngFor="let item of finalGainers" [item]="item">
+        </app-stock-tab>
+      </div>
+    </div>
+    <div class="losers-container">
+      <h1>Losers</h1>
+      <div class="card-container">
+        <app-stock-tab *ngFor="let item of finalLosers" [item]="item">
+        </app-stock-tab>
+      </div>
+    </div>
+  </div>
+  <div class="article-container">
+    <article *ngFor="let article of articleList">
+      <time [datetime]="article.time">{{ article.time }}</time>
+      <div class="story-headline">
+        <a class="news-url">{{ article.headline }}</a>
+      </div>
+    </article>
+  </div>
+  <!-- </aside> -->
+</div>
+
+<!-- <div></div> -->
+<!-- <ul *ngIf="daka | async as user">
+      <li *ngFor="let bytem of user">{{ bytem | json }}</li>
+    </ul> -->

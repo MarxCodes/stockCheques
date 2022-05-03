@@ -1,8 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&family=Poppins:wght@500&family=Inter:wght@300&family=Manrope:wght@700&display=swap');
 body, html {
   margin: 0;
 }
-
+:root {
+  --figure-font: 'Manrope', sans-serif;
+  --header-font: 'Poppins', sans-serif;
+  --number-font: 'Inter', sans-serif;
+  // --button-font: 'Secular One', sans-serif
+}
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: var(--header-font);
+  // font-family: 'Source Code Pro', monospace;
+ }
+ .mat-tab-header .mat-tab-label, > .mat-tab-link-container .mat-tab-link {
+       background-color: black;
+
+ }
+ .mat-tab-label  {
+  opacity: 1!important;
+
+ }
+
+ ._mat-tab-label-focus,.mat-tab-label {
+  // opacity: 1!important;
+   .mat-tab-label-content {
+     font-family: var(--figure-font);
+     font-weight: 700;
+     font-size: 1em;
+    }
+}
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: black;
+}

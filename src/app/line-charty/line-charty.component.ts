@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { concat, forkJoin, Observable, of } from 'rxjs';
+import { concatAll, map, tap, toArray } from 'rxjs/operators';
 import { DataService } from '../data.service';
 import { StockDayPrice } from '../models/stock-day-price.model';
-import { multi } from './data';
+import { culty } from './data';
+import { PracticeControllerService } from '../services/practice-controller.service';
+import { AlphaStock } from '../models/AlphaStock';
 @Component({
   selector: 'app-line-charty',
   templateUrl: './line-charty.component.html',
-  styleUrls: ['./line-charty.component.css']
+  styleUrls: ['./line-charty.component.scss']
 })
-export class LineChartyComponent implements OnInit {
+export class LineChartyComponent implements OnInit,OnDestroy {
   directedData = {
 
   }
 
-  view: any[] = [700, 300];
+  view: any[] ;
 
   // options
   legend: boolean = true;
@@ -24,44 +26,80 @@ export class LineChartyComponent implements OnInit {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Year';
-  yAxisLabel: string = 'Population';
+  xAxisLabel: string = 'Time';
+  yAxisLabel: string = 'Price';
   timeline: boolean = true;
-  multi : any[];
+  multi = [];
+  balty = []
   colorScheme = {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
-  keys = ['ABCM', 'AAPL', 'ACCD', 'ACER'];
-  newKey = [];
-  constructor(private ds: DataService) {
-    Object.assign(this, { multi })
+  arred = []
+  barr = [];
+  windowWeedth : number;
+  hideMap = this.multi.length > 0 ? true : false;
+  // selectedStocks = forkJoin(this.ds.selectedComparisonArray.map(item => {
+  //   return this.ds.alphaDataByMonth(item.Symbol, item.Name).pipe(
+  //     map(elems => elems.map((val, index) => ({name: index, value: +val.close})).slice(0,12)),
+  //     map(series => ([{name: item.Symbol,series }])),
+  //     // tap(callMe => console.log('meTHO: ',callMe))
+  //   )
+  // })).subscribe(canIt => console.log('canIT? :', canIt))
+  selectedMeStocks = this.ds.selectedComparisonArray.map(item => {
+   return this.ds.alphaDataByMonth(item.Symbol, item.Name).pipe(
+      map(elems => elems.map((val, index) => ({name: index, value: +val.close})).slice(0,12)),
+      map(series => ({name: item.Symbol,series })),
+    )
+  })
+
+  forked = forkJoin(this.selectedMeStocks)
+  // meme = of(...this.selectedMeStocks).pipe(toArray()).subscribe(response => console.log('res :',response))
+  // meActualStocks = forkJoin([...this.selectedMeStocks]).subscribe(no => console.log('no :', no))
+
+  // selectedARRAY : Observable<[]>;
+  // selectedChoices = this.ds.selectedComparisonArray;
+  // alphaData : Observable<AlphaStock[]> = this.ds.alphaDataByMonth(this.ds.selectedComparisonArray.)
+  constructor(private ds: DataService,
+              private cs: PracticeControllerService) {
+                // this.multi = this.ds.multi$;
+                // console.log('on linechart init: ', this.multi);
+                // this.getFinalArrItems();
+                // this.windowWeedth = (window.innerWidth * .5);
+                // console.log(this.windowWeedth)
+                // this.view = [this.windowWeedth, 500]
    }
 
+
+   getFinalArrItems() {
+    console.log(this.ds.multi$, "multeee")
+     let finalCounter;
+     return [...this.multi].forEach(o => {
+       console.log('o series:', o.series)
+       let first = o.series[0].value
+       let last = o.series[o.series.length - 1].value;
+       finalCounter = o.series[o.series.length - 1];
+       let benign = {
+         ...finalCounter,
+         first,
+         last
+        }
+
+       this.barr.push(benign);
+     })
+
+   }
+
+
+   multiStock() {
+   }
+
+
+
   ngOnInit(): void {
-    for (var id of this.keys) {
+  }
 
-      var thisIT = this.ds.getSumJson(id).subscribe(i => console.log)
-      // this.newKey.push(this.ds.getSumJson(id).subscribe(i => console.log(`from sub ${id}:`, i)))
-      this.newKey.push(thisIT);
-      console.log(thisIT)
-
-      // console.log(this.newKey);
-      // Returns the last item as many times as length of arr
-      // forkJoin(this.ds.getSumJson(id).subscribe(i => console.log(`from sub ${id}:`, i)))
-
-
-      // forkJoin(this.ds.getSumJson(id).subscribe(/i => console.log('from sub:', i)))
-
-      // this.newKey.push(this.ds.getSumJson(id))
-    }
-    console.log('newquays : ' + this.newKey);
-    this.multi = JSON.parse(JSON.stringify(this.newKey))
-    // forkJoin(this.newKey).subscribe(i => console.log(i))
-
-    // forkJoin(this.newKey).pipe(
-    //   tap(i => console.log(i))
-    // ).subscribe(i => console.log(i))
+  ngOnDestroy(): void {
   }
 
   onSelect(data): void {

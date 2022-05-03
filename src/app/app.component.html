@@ -1,7 +1,37 @@
 <!-- <app-search></app-search> -->
 <div class="content">
-  <app-practice-control></app-practice-control>
-  <!-- <app-search-control></app-search-control> -->
+  <nav>
+    <ul>
+      <!-- <li routerLink="/">Cheque <span>UP</span></li> -->
+      <li routerLink="/">Cheque Up</li>
 
+      <li>
+        Search
+        <mat-icon
+          aria-hidden="false"
+          class="green-icon"
+          (click)="toggleShowPanel()"
+          >search</mat-icon
+        >
+      </li>
+    </ul>
+
+    <span style="flex: 1 1 auto"></span>
+  </nav>
+  <!-- <app-practice-control></app-practice-control> -->
+  <!-- <app-search-control></app-search-control> -->
+  <!-- <app-console-w-service></app-console-w-service>
+  -->
+  <!-- <app-search-console [hidden]="showPanel" (toggle)="toggleSearch()"></app-search-console> -->
+  <app-search-console *ngIf="showPanel"></app-search-console>
+
+  <div class="router-container">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- <div class="wrapper" *ngIf="showChart"> -->
+  <!-- <div class="charts_container" *ngIf="showchartz">
+    <h1>shoqing charts</h1>
+  </div> -->
   <!-- <app-line-charty></app-line-charty> -->
+  <!-- </div> -->
 </div>

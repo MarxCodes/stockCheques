@@ -1,0 +1,38 @@
+<div class="wrapper">
+  <h1 class="name" title="{{ item.blame }}">
+    <!-- {{ item.blame | shortenText }} -->
+    {{ item.blame }}
+  </h1>
+  <h2>{{ item.nameTing }}</h2>
+  <h3 class="price">
+    latest <span class="num_val">$ {{ item.value }}</span>
+  </h3>
+  <h3 class="change">
+    24 hrs
+    <!-- <span *ngIf="increase"> -->
+    <mat-icon *ngIf="increase" aria-hidden="false" class="green-icon"
+      >arrow_drop_up</mat-icon
+    >
+    <!-- </span> -->
+    <!-- <span *ngIf="!increase"> -->
+    <mat-icon *ngIf="!increase" aria-hidden="false" class="negative-view"
+      >arrow_drop_down</mat-icon
+    >
+    <!-- </span> -->
+    <span class="num_val"> {{ percent }}% </span>
+  </h3>
+  <div class="naming-container">
+    <!-- <br /> -->
+  </div>
+  <div class="pricing-container">
+    <!-- <p>{{ count }}</p> -->
+    <!-- <p>first : {{ item.first }}</p>
+      <p>last: {{ item.last }}</p> -->
+    <!-- <p>%percent : {{ percent }}</p> -->
+
+    <!-- <p>{{ item | json }}</p> -->
+
+    <!-- <p>diff: {{ workOut({{item.first, item.last}}) }}</p> -->
+  </div>
+  <button>Details</button>
+</div>

@@ -1,0 +1,113 @@
+<div class="container" #enlargeAnimation [attr.data-state]="shrink">
+  <mat-icon aria-hidden="false" class="close">close</mat-icon>
+
+  <div class="bg"></div>
+  <div class="content-small content">
+    <!-- <button (click)="toggleDataView(btnContainer)">TOGGLE</button> -->
+    <!-- <div class="content-small"> -->
+    <div class="option-select">
+      <form [formGroup]="form">
+        <label for="detailed"
+          >detailed
+          <input
+            type="radio"
+            (change)="inputVal($event.target.value)"
+            formControlName="sizable"
+            value="detailed"
+            id="detailed"
+          />
+          <div class="check"></div>
+        </label>
+        <label for="comparison"
+          >Comparison
+          <input
+            type="radio"
+            (change)="inputVal($event.target.value)"
+            formControlName="sizable"
+            value="comparison"
+            id="comparison"
+          />
+          <div class="check"></div>
+        </label>
+      </form>
+    </div>
+    <div class="btn-section" #btnContainer [attr.data-view]="detailed">
+      <input
+        type="search"
+        [formControl]="control"
+        [appAutocomplete]="autocomplete"
+        placeholder="Search"
+      />
+      <button
+        #addBtn
+        class="add"
+        (click)="add(enlargeAnimation)"
+        [attr.data-clip]="true"
+      >
+        add
+      </button>
+      <button
+        class="search-btn"
+        #searchBtn
+        (click)="submitSearching()"
+        [attr.data-flip]="true"
+      >
+        search
+      </button>
+      <app-autocomplete #autocomplete="appAutocomplete">
+        <ng-template appAutocompleteContent>
+          <ng-container *ngIf="products | filter: control.value as result">
+            <app-option
+              #option
+              (passData)="passMyData($event, option.Symbol)"
+              *ngFor="let option of result.slice(0, 10); let i = index"
+              [value]="option.Name"
+              (mouseenter)="mouseEvent($event, i)"
+              (mouseleave)="mouseLeave($event, i)"
+              class="`item-${i}`"
+            >
+              <!-- (click)="sendDataToArray(option)" -->
+              <h1 class="autocomplete_complete-option_name">
+                {{ option.Name | shortenText }}
+              </h1>
+              <!-- <br /> -->
+              <h2 class="autocomplete_complete-option_symbol">
+                {{ option.Symbol }}
+              </h2>
+            </app-option>
+            <app-option class="no-result" *ngIf="!result.length"
+              >No result...</app-option
+            >
+          </ng-container>
+        </ng-template>
+      </app-autocomplete>
+
+      <!-- <div class="content-big content">
+        <div class="options-section">
+          <app-select
+            *ngFor="let bald of selectedArr; index as i"
+            (delete)="deleteItem($event, i)"
+          >
+            <p style="color: black; font-size: 18px; margin-bottom: 10px">
+              {{ bald.Symbol }}
+            </p>
+          </app-select>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <div class="content-big content">
+    <div class="options-section">
+      <app-select
+        class="selection"
+        *ngFor="let bald of selectedArr; index as i"
+        (delete)="deleteItem($event, i, enlargeAnimation)"
+      >
+        <p class="selectedItem" style="color: white; font-size: 18px">
+          {{ bald.Name | shortenText }}
+        </p>
+      </app-select>
+    </div>
+  </div>
+  <!-- </div> -->
+</div>

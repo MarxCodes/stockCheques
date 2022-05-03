@@ -1,0 +1,335 @@
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+.hover-mouse {
+  background-color: aqua;
+}
+*,
+*::before,
+*::after {
+  position: relative;
+}
+
+.selectedItem {
+  color: #32ff7e
+}
+@media screen and (min-width: 600px){
+  .container {
+    width: 20em;
+    padding: 0 10%;
+  }
+
+  .content .btn-section {
+    grid-gap: 1em;
+
+    .add {
+      width: 100%;
+      height: 3em;
+    }
+
+    .search-btn {
+      width: 100%;
+      height: 3em;
+
+    }
+  }
+
+  .content .options-section {
+    display: flex;
+    flex-direction: row;
+
+  }
+
+  .btn-section[data-view='comparison'] {
+    grid-template-columns: minmax(min-content, 70%) 1fr 1fr;
+
+    .add{
+      display: inline-block;
+    }
+  }
+  .btn-section[data-view='detailed'] {
+    grid-template-columns: minmax(min-content, 70%) 1fr;
+
+    .add{
+      display: none;
+    }
+  }
+}
+
+.container {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 6%;
+  margin: auto;
+  --radius: 1em;
+  --bg: linear-gradient(90deg, rgba(0,210,211,1) 0%, rgba(10,189,227,1) 100%);
+  // background: rgb(0,210,211);
+  // background: linear-gradient(90deg, rgba(0,210,211,1) 0%, rgba(10,189,227,1) 100%);
+  transform-origin: top left;
+  transition-property: transform;
+  transition-duration: 0.5s;
+  transition-delay: 0.5s;
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  position: relative;
+
+  .close {
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    color: red;
+  }
+  &[data-enlarging] {
+    transition: none;
+    transform: translateY(calc(-1px * var(--by)));
+  }
+}
+.content {
+  padding: 5px 0px;
+}
+
+.content-big {
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+}
+
+.container[data-state='shrink'] .content-big {
+  opacity: 0;
+  transition-delay: 1s;
+}
+
+.container[data-state="enlarge"] .content-big {
+  opacity: 1;
+  transition-delay: 1s;
+
+}
+
+.container[data-state="enlarge"] .content-big,
+.container[data-state="shrink"] .content-small{
+  position: relative;
+  transition-delay: 1s;
+  opacity: 1;
+}
+
+.bg {
+  transform-origin: top left;
+  transition: inherit;
+  transition-property: transform, border-radius;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  border-radius: var(--radius);
+  pointer-events: none;
+
+  [data-enlarging] > & {
+    transform: scaleY(calc(1 / var(--bh)));
+    border-radius: calc((var(--bw)) * var(--radius)) /
+    calc((var(--bh)) * var(--radius));
+  }
+}
+// inout search
+input[type=search] {
+  height: 3em;
+  border-radius: 2rem;
+  border: none;
+  padding: .2rem .5rem;
+  width: 100%;
+}
+
+input[type=search]:focus {
+   outline: solid 3px #40739e;
+   width: 100%;
+}
+
+.autocomplete_complete-option_name {
+  font-size: 1em;
+  margin: 0;
+  padding-right: .4em;
+}
+.autocomplete_complete-option_symbol{
+  font-size: .8em;
+  margin: 0;
+  color:#57606f
+}
+
+.btn-section {
+  display: grid;
+  grid-gap: .2em;
+  justify-items: center;
+  position: relative;
+  & > * {
+    transition: transform .3s;
+    transition-property: transform, opacity, visibility;
+  }
+
+  .add {
+
+      height: 2.5em;
+      width: 2.5em;
+      background-color: #341f97;
+      color: #ffffff;
+      // border: none;
+      border-radius: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    // &::before {
+    //   // content: 'add';
+    //   outline: 2px dashed yellow;
+    //   position: absolute;
+    //   top: 40%;
+    //   left: 50%;
+    // }
+
+    // ::after {
+    //   content: 'add'
+    // }
+  }
+
+  .search-btn {
+    transform-origin: left;
+    border-radius: 2rem;
+    border: none;
+    height: 2.5em;
+    width: 2.5em;
+    background-color: #1dd1a1;
+  }
+}
+
+.btn-section[data-view='comparison'] {
+  grid-template-columns: minmax(min-content, 80%) 1fr 1fr;
+  .add{
+    display: inline-block;
+  }
+
+  .search-btn {
+    // grid-column: span 1;
+
+  }
+}
+.btn-section[data-view='detailed'] {
+  grid-template-columns: minmax(min-content, 80%) 1fr 1fr;
+
+  .search-btn {
+    // grid-column: span 2;
+  }
+  .add{
+    display: none;
+
+  }
+}
+
+
+[data-flip] {
+  transition-property: transform visibiility;
+
+  &[data-flipping] {
+    transition: none;
+    transform: translate(calc(-1px * var(--dx)), calc(-1px * var(--dy)));
+  }
+  &[data-clip] {
+    // transition-property: visibiility;
+    transition: none;
+    visibility: block;
+  }
+}
+
+
+
+// @media (min-width: 20em) {
+//   .container {
+//     width: 100%;
+// }
+// }
+
+
+.options-section {
+  display: flex;
+  flex-direction: column;
+  .selection{
+    margin-bottom: 5px;
+  }
+  // & > * {
+  // }
+  .selectedItem {
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+
+// inout radio buttons
+
+input[type=radio]:checked ~ .check {
+  border: 5px solid #ffffff;
+}
+
+input[type=radio]:checked ~ .check::before{
+  background: #ffffff;
+}
+
+input[type=radio]:checked ~ label{
+  color: #ffffff;
+}
+
+form label input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+}
+
+form label {
+  // display: block;
+  color: #ffffff;
+  display: inline-block;
+  position: relative;
+  // position: relative;
+  padding: 20px 20px 20px 60px;
+  // padding: 20px 20px 20px 79px;
+  height: 10px;
+  z-index:5;
+  cursor: pointer;
+  margin: 10px auto;
+  transition: all 0.25s linear;
+}
+// ul li:hover label {
+//   color: #ffffff;
+// }
+form label .check {
+    display: block;
+    position: absolute;
+    // border: 5px solid #ffffff;
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+    // height: 25px;
+    height: 18px;
+
+    width: 18px;
+    top: 15px;
+    left: 20px;
+    z-index: 5;
+    transition: border 0.25s linear;
+}
+
+form label .check::before {
+  display: block;
+  position: absolute;
+  content: '';
+  border-radius: 100%;
+  height: 12px;
+  width: 12px;
+  top: 3px;
+  left: 3px;
+  // height: 15px;
+  // width: 15px;
+  // top: 5px;
+  // left: 5px;
+  margin: auto;
+  transition: background .25s linear;
+}
